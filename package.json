@@ -1,16 +1,17 @@
 {
-  "name": "playing-with-aave",
+  "name": "credit-delegation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "truffle migrate --network kovan --skipDryRun"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.2.0",
     "dotenv": "^8.2.0"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
