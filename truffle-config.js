@@ -14,7 +14,7 @@ module.exports = {
     },
     kovan: {
       provider: () => new HDWalletProvider(PRIVATE_KEY, `https://kovan.infura.io/v3/${INFURA_PROJECT_ID}`),
-      network_id: 42
+      network_id: '*'
     }
   },
   compilers: {
