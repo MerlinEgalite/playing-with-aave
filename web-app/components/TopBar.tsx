@@ -1,16 +1,20 @@
 import dynamic from 'next/dynamic'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const WalletButton = dynamic((): Promise<any> => import('./WalletButton'), { ssr: false })
 
 export default function TopBar(): JSX.Element {
 	return (
 		<StyledTopBar>
-			<StyledMobileMenuWrapper>
-				<StyledWalletButton>
-					<WalletButton/>
-				</StyledWalletButton>
-			</StyledMobileMenuWrapper>
+			<Link href="/">
+				<StyledLogo>
+					<StyledText>🌍 The Cool Project</StyledText>
+				</StyledLogo>
+			</Link>
+			<StyledDesktopMenuWrapper>
+			</StyledDesktopMenuWrapper>
+			<WalletButton/>
 		</StyledTopBar>
 	)
 }
@@ -21,14 +25,6 @@ const StyledTopBar = styled.div`
 	height: 72px;
 	justify-content: space-between;
 	width: 100%;
-`
-
-const StyledMobileMenuWrapper = styled.div`
-	display: none;
-
-	@media (max-width: 900px) {
-		display: block;
-	}
 `
 
 const StyledLogo = styled.div`
@@ -49,14 +45,6 @@ const StyledText = styled.span`
 	font-weight: 700;
 	margin-left: 20px;
 	@media (max-width: 400px) {
-		display: none;
-	}
-`
-
-const StyledWalletButton = styled.div`
-	display: block;
-
-	@media (max-width: 900px) {
 		display: none;
 	}
 `
