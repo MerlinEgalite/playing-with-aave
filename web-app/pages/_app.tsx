@@ -3,10 +3,9 @@ import AppContext, { IAppContext } from '../components/app-context'
 import Web3Modal from 'web3modal'
 import { Web3Provider } from '@ethersproject/providers'
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import { createGlobalStyle } from 'styled-components'
+import { GlobalStyle } from '../styles/style'
+import '../styles/App.css'
 
-export const GlobalStyle = createGlobalStyle`
-`
 
 type AppState = {
 	initialized: boolean

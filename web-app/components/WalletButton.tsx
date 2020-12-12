@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
+import { Button } from 'antd'
 
 import Web3Modal from 'web3modal'
 import AppContext from './app-context'
@@ -33,8 +34,8 @@ export default function WalletButton(): JSX.Element {
 	}
 
 	return (
-		<button onClick={buttonOnClick}>
-			Click
-		</button>
+		<Button type="primary" size="large" onClick={buttonOnClick}>
+			Connect Wallet
+		</Button>
 	)
 }
