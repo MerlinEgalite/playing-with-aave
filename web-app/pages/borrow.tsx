@@ -13,7 +13,7 @@ export default function Borrow(): JSX.Element {
 				subtitle=""
 			/>
 			<Row gutter={[0, 24]}>
-				<Col style={{ textAlign: 'center' }} md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
+				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
 				</Col>
 			</Row>
 		</LayoutPage>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
@@ -17,7 +17,7 @@ export default function Deposit(): JSX.Element {
 	const [formDisabled, setFormDisabled] = useState(false)
 
 	const layout = {
-		labelCol: { span: 5 },
+		labelCol: { span: 10 },
 		wrapperCol: { span: 14 },
 	}
 
@@ -57,8 +57,8 @@ export default function Deposit(): JSX.Element {
 				subtitle=""
 			/>
 			<Row gutter={[0, 24]}>
-				<Col style={{ textAlign: 'center' }} md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
-					<Form {...layout} form={form} style={{ paddingTop: '24px' }} onFinish={onFinish} requiredMark={false}>
+				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
+					<Form {...layout} form={form} onFinish={onFinish} requiredMark={false}>
 						<Form.Item
 							label="Asset address"
 							name="tokenAddress"
@@ -83,14 +83,16 @@ export default function Deposit(): JSX.Element {
 						>
 							<Input disabled={formDisabled} type="number" min={0} />
 						</Form.Item>
-						<Row gutter={[24, 24]}>
-							<Button type="primary" htmlType="submit" disabled={formDisabled}>
+						<Form.Item>
+							<Button style={{ float: 'right' }} type="primary" htmlType="submit" disabled={formDisabled}>
 								Deposit tokens
 							</Button>
-						</Row>
+						</Form.Item>
 					</Form>
 				</Col>
 			</Row>
 		</LayoutPage>
 	)
 }
+
+

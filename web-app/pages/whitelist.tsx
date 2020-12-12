@@ -57,7 +57,7 @@ export default function Whitelist(): JSX.Element {
 				subtitle="Here you can whitelist someone to borrow money"
 			/>
 			<Row gutter={[0, 24]}>
-				<Col style={{ textAlign: 'center' }} md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
+				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
 					<Form {...layout} form={form} style={{ paddingTop: '24px' }} onFinish={onFinish} requiredMark={false}>
 						<Form.Item
 							label="Borrower address"

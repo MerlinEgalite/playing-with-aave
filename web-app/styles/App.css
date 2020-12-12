@@ -23,11 +23,11 @@ html {
 }
 
 a {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 a:hover {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 * {
@@ -74,7 +74,7 @@ a:hover {
 }
 
 .ant-menu-horizontal > .ant-menu-item a:hover {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-item ant-menu-item-only-child {
@@ -82,11 +82,11 @@ a:hover {
 }
 
 .ant-menu-item ant-menu-item-only-child a:active {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-horizontal > .ant-menu-item-selected a {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-item {
@@ -99,7 +99,7 @@ a:hover {
 
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
 	border: none;
-	color: #7451eb;
+	color: #4361ee;
 }
 
 /* Menu Vertical */
@@ -110,7 +110,7 @@ a:hover {
 }
 
 .ant-menu-vertical > .ant-menu-item a:hover {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-item ant-menu-item-only-child {
@@ -118,11 +118,11 @@ a:hover {
 }
 
 .ant-menu-item ant-menu-item-only-child a:active {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-vertical > .ant-menu-item-selected a {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-item {
@@ -135,7 +135,7 @@ a:hover {
 
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
 	border: none;
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-menu-root.ant-menu-vertical, .ant-menu-root.ant-menu-vertical-left, .ant-menu-root.ant-menu-vertical-right, .ant-menu-root.ant-menu-inline {
@@ -165,7 +165,7 @@ a:hover {
 /* Button */
 
 .ant-btn {
-	border: #7451eb;
+	border: #4361ee;
 	outline: none;
 	text-transform: none;
 }
@@ -173,17 +173,18 @@ a:hover {
 .ant-btn-default {
 	color: white;
 	border-radius: 18px;
-	background: #7451eb;
-	border: 1px;
+	background: #4361ee;
+	border: none;
 	padding-left: 16px;
 	padding-right: 16px;
 	align-items: center;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .ant-btn:hover {
 	color: rgb(20,1,8);
 	background: white;
-	border: 1px solid rgb(20,1,8);
+	border: none;
 }
 
 .ant-btn-primary {
@@ -191,22 +192,25 @@ a:hover {
 	font-weight: bold;
 	border-radius: 18px;
 	background: white;
-	border: 1px solid rgb(20,1,8);
+	border: none;
 	padding-left: 16px;
 	padding-right: 16px;
 	text-shadow: none;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .ant-btn-primary:active {
 	color: white;
-	background: #7451eb;
-	border-color: #7451eb;
+	background: #4361ee;
+	border-color: #4361ee;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .ant-btn-primary:hover, .ant-btn-primary:focus {
 	color: white;
-	background: #7451eb;
-	border-color: #7451eb;
+	background: #4361ee;
+	border-color: #4361ee;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .ant-menu-item {
@@ -277,40 +281,40 @@ a:hover {
 /* Steps */
 
 .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail:after {
-	background-color: #7451eb;
+	background-color: #4361ee;
 }
 
 .ant-steps-item-process .ant-steps-item-icon {
-	background: #7451eb;
-	border-color: #7451eb;
-	color: #7451eb;
+	background: #4361ee;
+	border-color: #4361ee;
+	color: #4361ee;
 }
 
 .ant-steps-item-icon .ant-steps-icon {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
-	border-color: #7451eb;
-	color:#7451eb;
+	border-color: #4361ee;
+	color:#4361ee;
 }
 
 .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
-	background-color: #7451eb;
+	background-color: #4361ee;
 }
 
 .ant-steps-item-finish .ant-steps-item-icon {
-	border-color: #7451eb;
+	border-color: #4361ee;
 }
 
 .ant-message-info .anticon, .ant-message-loading .anticon {
-	color: #7451eb;
+	color: #4361ee;
 }
 
 /* Spin */
 
 .ant-spin-dot-item {
-	background: #7451eb;
+	background: #4361ee;
 }
 
 /* Progress */
