@@ -21,4 +21,15 @@ cd truffle
 npm run migrate:kovan
 ```
 
-Then, update the addresses and abis in the `contracts`folder in `web-app`.
+Then, update the addresses and abis in the `contracts` folder in `web-app`.
+
+## TODO
+
+Short terms:
+- Create forms to to whitelist someone.
+- Update SC to allow someone to borrow.
+
+
+Long terms:
+- Implement conviction voting to whitelist new borrowers.
+- Allow projects to run for being whitelisted.
