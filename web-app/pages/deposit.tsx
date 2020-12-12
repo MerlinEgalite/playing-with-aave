@@ -31,15 +31,22 @@ export default function App(): JSX.Element {
 
 		const signer = context?.web3Provider?.getSigner()
 		const address = await signer?.getAddress()
-		const userAddress = address
-		const crediDelegationContract = new ethers.Contract(creditDelgeationAddress, creditDelgeationAbi, signer)
+		const creditDelegationContract = new ethers.Contract(creditDelgeationAddress, creditDelgeationAbi, signer)
+
+		console.log(creditDelegationContract)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
+		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.depositCollateral)) as ethers.BigNumber
 
 		try {
-			await crediDelegationContract.depositCollateral(values.tokenAddress, tokenAmount, false)
+			await creditDelegationContract.depositCollateral(
+				values.tokenAddress,
+				tokenAmount,
+				false,
+				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
+			)
 		} catch (e) {
 			console.log(e)
 		}
