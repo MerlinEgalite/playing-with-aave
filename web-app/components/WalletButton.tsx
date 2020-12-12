@@ -1,16 +1,14 @@
 import { useContext } from 'react'
-import { useRouter } from 'next/router'
 import { Button } from 'antd'
 
 import Web3Modal from 'web3modal'
-import AppContext from './app-context'
+import AppContext from '../utils/app-context'
 
 import { Web3Provider } from '@ethersproject/providers'
 
 
 export default function WalletButton(): JSX.Element {
 	const context = useContext(AppContext)
-	const router = useRouter()
 	const web3Modal: Web3Modal | undefined | null = context?.web3Modal
 
 	const logoutOfWeb3Modal = function (): void {
@@ -35,7 +33,9 @@ export default function WalletButton(): JSX.Element {
 
 	return (
 		<Button type="primary" size="large" onClick={buttonOnClick}>
-			Connect Wallet
+			{
+				web3Modal?.cachedProvider ? 'Disconnect Wallet' : 'Connect Wallet'
+			}
 		</Button>
 	)
 }

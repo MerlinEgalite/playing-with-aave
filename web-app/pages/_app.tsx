@@ -1,5 +1,5 @@
 import App from 'next/app'
-import AppContext, { IAppContext } from '../components/app-context'
+import AppContext, { IAppContext } from '../utils/app-context'
 import Web3Modal from 'web3modal'
 import { Web3Provider } from '@ethersproject/providers'
 import WalletConnectProvider from '@walletconnect/web3-provider'
