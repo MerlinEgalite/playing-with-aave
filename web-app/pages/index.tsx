@@ -17,6 +17,7 @@ export default function App(): JSX.Element {
 			<Row gutter={[0, 24]}>
 				<Col style={{ textAlign: 'center' }} md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
 					<Button onClick={() => router.push('/deposit')}>Deposit Collateral</Button>
+					<Button onClick={() => router.push('/whitelist')}>Whitelist Borrow</Button>
 					<Button onClick={() => router.push('/borrow')}>Borrow</Button>
 				</Col>
 			</Row>

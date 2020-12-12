@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
@@ -11,7 +11,7 @@ import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
 
 
-export default function Deposit(): JSX.Element {
+export default function Whitelist(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
 	const [formDisabled, setFormDisabled] = useState(false)
@@ -33,13 +33,13 @@ export default function Deposit(): JSX.Element {
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
-		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.depositCollateral)) as ethers.BigNumber
+		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.approveBorrower)) as ethers.BigNumber
 
 		try {
-			await creditDelegationContract.depositCollateral(
-				values.tokenAddress,
+			await creditDelegationContract.approveBorrower(
+				values.borrowerAddress,
 				tokenAmount,
-				false,
+				values.tokenAddress,
 				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
 			)
 		} catch (e) {
@@ -53,12 +53,36 @@ export default function Deposit(): JSX.Element {
 		<LayoutPage>
 			<PageHeader
 				linkToImage="/earth.png"
-				title="Deposit"
-				subtitle=""
+				title="Whitelist someone"
+				subtitle="Here you can whitelist someone to borrow money"
 			/>
 			<Row gutter={[0, 24]}>
 				<Col style={{ textAlign: 'center' }} md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
 					<Form {...layout} form={form} style={{ paddingTop: '24px' }} onFinish={onFinish} requiredMark={false}>
+						<Form.Item
+							label="Borrower address"
+							name="borrowerAddress"
+							rules={[
+								{
+									required: true,
+									message: 'The address of the borrower is required',
+								},
+							]}
+						>
+							<Input disabled={formDisabled} />
+						</Form.Item>
+						<Form.Item
+							label="Amount"
+							name="tokenAmount"
+							rules={[
+								{
+									required: true,
+									message: 'The amount of tokens the borrower can borrow is required',
+								},
+							]}
+						>
+							<Input disabled={formDisabled} type="number" min={0} />
+						</Form.Item>
 						<Form.Item
 							label="Asset address"
 							name="tokenAddress"
@@ -71,21 +95,9 @@ export default function Deposit(): JSX.Element {
 						>
 							<Input disabled={formDisabled} />
 						</Form.Item>
-						<Form.Item
-							label="Amount"
-							name="tokenAmount"
-							rules={[
-								{
-									required: true,
-									message: 'The amount of token to send is required',
-								},
-							]}
-						>
-							<Input disabled={formDisabled} type="number" min={0} />
-						</Form.Item>
 						<Row gutter={[24, 24]}>
 							<Button type="primary" htmlType="submit" disabled={formDisabled}>
-								Deposit tokens
+								Whitelist borrower
 							</Button>
 						</Row>
 					</Form>

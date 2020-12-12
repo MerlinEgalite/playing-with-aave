@@ -33,3 +33,10 @@ Short terms:
 Long terms:
 - Implement conviction voting to whitelist new borrowers.
 - Allow projects to run for being whitelisted.
+
+
+## Utils
+
+
+DAI address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
+Address to whitelist: 0x627306090abaB3A6e1400e9345bC60c78a8BEf57

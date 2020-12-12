@@ -3,7 +3,7 @@ import { Row, Col } from 'antd'
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
 
-export default function App(): JSX.Element {
+export default function Borrow(): JSX.Element {
 
 	return (
 		<LayoutPage>
