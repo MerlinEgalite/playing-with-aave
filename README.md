@@ -39,4 +39,5 @@ Long terms:
 
 
 DAI address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
+First account: 0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73
 Address to whitelist: 0x627306090abaB3A6e1400e9345bC60c78a8BEf57

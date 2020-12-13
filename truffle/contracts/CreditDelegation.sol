@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity >=0.6.12;
 
-import { IERC20, ILendingPool, IProtocolDataProvider, IStableDebtToken } from './Interfaces.sol';
-import { SafeERC20 } from './Libraries.sol';
+import { ILendingPool, IProtocolDataProvider, IStableDebtToken } from './Interfaces.sol';
+import { IERC20 } from './token/ERC20/IERC20.sol';
+import { SafeERC20 } from './token/ERC20/SafeERC20.sol';
 
 /**
  * This is a proof of concept starter contract, showing how uncollaterised loans are possible
@@ -52,6 +53,15 @@ contract CreditDelegation {
 	function approveBorrower(address borrower, uint256 amount, address asset) public {
 		(, address stableDebtTokenAddress,) = dataProvider.getReserveTokensAddresses(asset);
 		IStableDebtToken(stableDebtTokenAddress).approveDelegation(borrower, amount);
+	}
+
+	function borrowCredit(uint256 amount, address asset, address delegator) public {
+		lendingPool.borrow(asset, amount, 1, 0, delegator);
+	}
+
+	function checkAllowance(address delegator, address delegatee, address asset) public view returns(uint256) {
+		(, address stableDebtTokenAddress,) = dataProvider.getReserveTokensAddresses(asset);
+		return IStableDebtToken(stableDebtTokenAddress).borrowAllowance(delegator, delegatee);
 	}
 
 	/**

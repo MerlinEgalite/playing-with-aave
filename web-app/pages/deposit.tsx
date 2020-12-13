@@ -21,14 +21,14 @@ export default function Deposit(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelgeationAddress = addresses.creditDelegation
-	const creditDelgeationAbi = creditDelegationJson.abi
+	const creditDelegationAddress = addresses.creditDelegation
+	const creditDelegationAbi = creditDelegationJson.abi
 
 	const onFinish = async (values: any): Promise<void> => {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
-		const creditDelegationContract = new ethers.Contract(creditDelgeationAddress, creditDelgeationAbi, signer)
+		const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
