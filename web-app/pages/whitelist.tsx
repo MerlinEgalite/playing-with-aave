@@ -35,6 +35,10 @@ export default function Whitelist(): JSX.Element {
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
 		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.approveBorrower)) as ethers.BigNumber
 
+		console.log(values.borrowerAddress)
+		console.log(tokenAmount)
+		console.log(values.tokenAddress)
+
 		try {
 			await creditDelegationContract.approveBorrower(
 				values.borrowerAddress,

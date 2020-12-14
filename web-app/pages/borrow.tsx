@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
@@ -15,6 +15,7 @@ export default function Borrow(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
 	const [formDisabled, setFormDisabled] = useState(false)
+	const [allowance, setAllowance] = useState('0')
 
 	const layout = {
 		labelCol: { span: 10 },
@@ -23,18 +24,29 @@ export default function Borrow(): JSX.Element {
 
 	const creditDelegationAddress = addresses.creditDelegation
 	const creditDelegationAbi = creditDelegationJson.abi
+	const signer = context?.web3Provider?.getSigner()
+	const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
 
-	const getAllowance = async (): Promise<void> => {
-		const signer = context?.web3Provider?.getSigner()
-		const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
-		const response = await creditDelegationContract.checkAllowance(
-			'0x122a4f8848fb5df788340fd07fc7276cc038dc01',
-			'0x627306090abaB3A6e1400e9345bC60c78a8BEf57',
-			'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd'
-		)
+	useEffect(() => {
+		;(async function iife() {
+			if (context.web3Provider === null) {
+				return
+			}
 
-		console.log(response.toString())
-	}
+			try {
+				const address = await context?.web3Provider?.getSigner().getAddress()
+				const result = await creditDelegationContract.checkAllowance(
+					'0x122a4f8848fb5df788340fd07fc7276cc038dc01',
+					address,
+					'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd'
+				)
+				setAllowance(result.toString())
+			} catch (e) {
+				console.log(e)
+			}
+
+		})()
+	}, [context.web3Provider])
 
 	const onFinish = async (values: any): Promise<void> => {
 		setFormDisabled(true)
@@ -64,6 +76,14 @@ export default function Borrow(): JSX.Element {
 		setFormDisabled(false)
 	}
 
+
+	const test = async (): Promise<void> => {
+		const provider = context?.web3Provider
+		const result = await provider?.getBlockWithTransactions(22591269)
+
+		console.log(result)
+	}
+
 	return (
 		<LayoutPage>
 			<PageHeader
@@ -73,9 +93,8 @@ export default function Borrow(): JSX.Element {
 			/>
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
-					<Button type="primary" onClick={() => getAllowance()}>
-						Test
-					</Button>
+					<p style={{ textAlign: 'center' }}>Your are allowed to borrow: { allowance } Kovan Dai</p>
+					<Button onClick={() => test()}>Test</Button>
 				</Col>
 			</Row>
 			<Row gutter={[0, 24]}>
@@ -87,7 +106,7 @@ export default function Borrow(): JSX.Element {
 							rules={[
 								{
 									required: true,
-									message: 'The amount of token to send is required',
+									message: 'The amount of token to borrow is required',
 								},
 							]}
 						>

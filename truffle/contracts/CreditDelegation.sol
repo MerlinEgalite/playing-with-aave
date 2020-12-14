@@ -55,10 +55,24 @@ contract CreditDelegation {
 		IStableDebtToken(stableDebtTokenAddress).approveDelegation(borrower, amount);
 	}
 
+	/**
+		* Borrows some the uncollaterised loan
+		* @param amount The amount the borrower is allowed to borrow (i.e. their line of credit)
+		* @param asset The asset they are allowed to borrow
+		* @param delegator The delegator of the funds
+		*
+		* Add permissions to this call, e.g. only the delegatee should be able to approve borrowers!
+		*/
 	function borrowCredit(uint256 amount, address asset, address delegator) public {
 		lendingPool.borrow(asset, amount, 1, 0, delegator);
 	}
 
+	/**
+		* Checks allowance for loan
+		* @param delegator The delegator of the funds
+		* @param delegatee The delegatee of the funds
+		* @param asset The asset they are allowed to borrow
+		*/
 	function checkAllowance(address delegator, address delegatee, address asset) public view returns(uint256) {
 		(, address stableDebtTokenAddress,) = dataProvider.getReserveTokensAddresses(asset);
 		return IStableDebtToken(stableDebtTokenAddress).borrowAllowance(delegator, delegatee);
