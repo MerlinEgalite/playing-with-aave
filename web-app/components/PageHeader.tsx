@@ -24,8 +24,8 @@ const StyledPageHeader = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 72px;
+	padding-bottom: 36px;
 	margin: 0 auto;
 `
 

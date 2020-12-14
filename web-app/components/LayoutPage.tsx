@@ -20,6 +20,8 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 			<Layout.Content>{children}</Layout.Content>
 			<Layout.Footer style={{ textAlign: 'center' }}>
 				🌍 The Cool Project
+				<br/>Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
+				<br/>Credit Delegation contract address: 0x122a4f8848fb5df788340fd07fc7276cc038dc01
 			</Layout.Footer>
 		</Layout>
 	)

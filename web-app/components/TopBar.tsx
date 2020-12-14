@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 import Link from 'next/link'
 
+import DesktopMenu from './DesktopMenu'
+
 const WalletButton = dynamic((): Promise<any> => import('./WalletButton'), { ssr: false })
 
 export default function TopBar(): JSX.Element {
@@ -13,6 +15,7 @@ export default function TopBar(): JSX.Element {
 				</StyledLogo>
 			</Link>
 			<StyledDesktopMenuWrapper>
+				<DesktopMenu/>
 			</StyledDesktopMenuWrapper>
 			<WalletButton/>
 		</StyledTopBar>
