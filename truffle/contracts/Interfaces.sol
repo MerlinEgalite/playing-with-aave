@@ -514,7 +514,7 @@ interface IStableDebtToken {
     uint256 avgStableRate,
     uint256 newTotalSupply
   );
-  
+
   /**
    * @dev delegates borrowing power to a user on the specific debt token
    * @param delegatee the address receiving the delegated borrowing power

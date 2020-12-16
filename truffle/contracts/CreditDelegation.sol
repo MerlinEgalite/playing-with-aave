@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity >=0.6.12;
 
-import { ILendingPool, IProtocolDataProvider, IStableDebtToken } from './Interfaces.sol';
-import { IERC20 } from './token/ERC20/IERC20.sol';
-import { SafeERC20 } from './token/ERC20/SafeERC20.sol';
+import { ILendingPool, IProtocolDataProvider, IStableDebtToken, ILendingPoolAddressesProvider } from "./Interfaces.sol";
+import { IERC20 } from "./token/ERC20/IERC20.sol";
+import { SafeERC20 } from "./token/ERC20/SafeERC20.sol";
 
 /**
  * This is a proof of concept starter contract, showing how uncollaterised loans are possible
@@ -16,12 +16,17 @@ import { SafeERC20 } from './token/ERC20/SafeERC20.sol';
 contract CreditDelegation {
 	using SafeERC20 for IERC20;
 
-	ILendingPool constant lendingPool = ILendingPool(address(0x9FE532197ad76c5a68961439604C037EB79681F0)); // Kovan
-	IProtocolDataProvider constant dataProvider = IProtocolDataProvider(address(0x744C1aaA95232EeF8A9994C4E0b3a89659D9AB79)); // Kovan
+	ILendingPoolAddressesProvider provider;
+	ILendingPool lendingPool;
+	IProtocolDataProvider dataProvider;
 
 	address owner;
 
 	constructor () public {
+		// Kovan
+		provider = ILendingPoolAddressesProvider(address(0x652B2937Efd0B5beA1c8d54293FC1289672AFC6b));
+		lendingPool = ILendingPool(provider.getLendingPool());
+		dataProvider = IProtocolDataProvider(provider.getAddress('0x1'));
 		owner = msg.sender;
 	}
 
