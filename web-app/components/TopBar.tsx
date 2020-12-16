@@ -15,9 +15,9 @@ export default function TopBar(): JSX.Element {
 				</StyledLogo>
 			</Link>
 			<StyledDesktopMenuWrapper>
-				<DesktopMenu/>
+				<DesktopMenu />
 			</StyledDesktopMenuWrapper>
-			<WalletButton/>
+			<WalletButton />
 		</StyledTopBar>
 	)
 }
@@ -57,4 +57,3 @@ const StyledDesktopMenuWrapper = styled.div`
 		display: none;
 	}
 `
-

@@ -10,7 +10,6 @@ import AppContext from '../utils/app-context'
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
 
-
 export default function Deposit(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
@@ -36,12 +35,9 @@ export default function Deposit(): JSX.Element {
 		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.depositCollateral)) as ethers.BigNumber
 
 		try {
-			await creditDelegationContract.depositCollateral(
-				values.tokenAddress,
-				tokenAmount,
-				false,
-				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
-			)
+			await creditDelegationContract.depositCollateral(values.tokenAddress, tokenAmount, false, {
+				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+			})
 		} catch (e) {
 			console.log(e)
 		}
@@ -51,11 +47,7 @@ export default function Deposit(): JSX.Element {
 
 	return (
 		<LayoutPage>
-			<PageHeader
-				linkToImage="/earth.png"
-				title="Deposit"
-				subtitle=""
-			/>
+			<PageHeader linkToImage="/earth.png" title="Deposit" subtitle="" />
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
 					<Form {...layout} form={form} onFinish={onFinish} requiredMark={false}>
@@ -94,5 +86,3 @@ export default function Deposit(): JSX.Element {
 		</LayoutPage>
 	)
 }
-
-

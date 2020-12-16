@@ -6,7 +6,6 @@ import AppContext from '../utils/app-context'
 
 import { Web3Provider } from '@ethersproject/providers'
 
-
 export default function WalletButton(): JSX.Element {
 	const context = useContext(AppContext)
 	const web3Modal: Web3Modal | undefined | null = context?.web3Modal
@@ -33,9 +32,7 @@ export default function WalletButton(): JSX.Element {
 
 	return (
 		<Button type="primary" size="large" onClick={buttonOnClick}>
-			{
-				web3Modal?.cachedProvider ? 'Disconnect Wallet' : 'Connect Wallet'
-			}
+			{web3Modal?.cachedProvider ? 'Disconnect Wallet' : 'Connect Wallet'}
 		</Button>
 	)
 }

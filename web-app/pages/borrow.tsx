@@ -10,7 +10,6 @@ import AppContext from '../utils/app-context'
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
 
-
 export default function Borrow(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
@@ -44,7 +43,6 @@ export default function Borrow(): JSX.Element {
 			} catch (e) {
 				console.log(e)
 			}
-
 		})()
 	}, [context.web3Provider])
 
@@ -63,19 +61,15 @@ export default function Borrow(): JSX.Element {
 		console.log(values)
 
 		try {
-			await creditDelegationContract.borrowCredit(
-				tokenAmount,
-				values.tokenAddress,
-				values.delegatorAddress,
-				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
-			)
+			await creditDelegationContract.borrowCredit(tokenAmount, values.tokenAddress, values.delegatorAddress, {
+				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+			})
 		} catch (e) {
 			console.log(e)
 		}
 
 		setFormDisabled(false)
 	}
-
 
 	const test = async (): Promise<void> => {
 		const provider = context?.web3Provider
@@ -86,14 +80,10 @@ export default function Borrow(): JSX.Element {
 
 	return (
 		<LayoutPage>
-			<PageHeader
-				linkToImage="/earth.png"
-				title="Borrow"
-				subtitle=""
-			/>
+			<PageHeader linkToImage="/earth.png" title="Borrow" subtitle="" />
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
-					<p style={{ textAlign: 'center' }}>Your are allowed to borrow: { allowance } Kovan Dai</p>
+					<p style={{ textAlign: 'center' }}>Your are allowed to borrow: {allowance} Kovan Dai</p>
 					<Button onClick={() => test()}>Test</Button>
 				</Col>
 			</Row>

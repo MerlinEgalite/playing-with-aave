@@ -1,5 +1,4 @@
 import { Row, Button, Col } from 'antd'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import LayoutPage from '../components/LayoutPage'
@@ -31,5 +30,3 @@ export default function App(): JSX.Element {
 		</LayoutPage>
 	)
 }
-
-

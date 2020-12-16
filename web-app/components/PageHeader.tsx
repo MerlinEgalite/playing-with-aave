@@ -11,7 +11,7 @@ interface PageHeaderProps {
 export default function PageHeader(props: PageHeaderProps): JSX.Element {
 	return (
 		<StyledPageHeader>
-			<img src={props.linkToImage} alt="image" style={{ height: 96, width: 96 }} />
+			<img src={props.linkToImage} alt="" style={{ height: 96, width: 96 }} />
 			<Space />
 			<StyledTitle>{props.title}</StyledTitle>
 			{props.subtitle && <StyledSubtitle>{props.subtitle}</StyledSubtitle>}

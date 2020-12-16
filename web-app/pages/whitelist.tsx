@@ -10,7 +10,6 @@ import AppContext from '../utils/app-context'
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
 
-
 export default function Whitelist(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
@@ -40,12 +39,9 @@ export default function Whitelist(): JSX.Element {
 		console.log(values.tokenAddress)
 
 		try {
-			await creditDelegationContract.approveBorrower(
-				values.borrowerAddress,
-				tokenAmount,
-				values.tokenAddress,
-				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
-			)
+			await creditDelegationContract.approveBorrower(values.borrowerAddress, tokenAmount, values.tokenAddress, {
+				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+			})
 		} catch (e) {
 			console.log(e)
 		}
