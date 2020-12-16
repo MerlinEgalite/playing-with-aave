@@ -35,7 +35,7 @@ export default function Borrow(): JSX.Element {
 			try {
 				const address = await context?.web3Provider?.getSigner().getAddress()
 				const result = await creditDelegationContract.checkAllowance(
-					'0x122a4f8848fb5df788340fd07fc7276cc038dc01',
+					'0xe979891Da8c2af95146ef2eE7C6eBD20cBda5F45',
 					address,
 					'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd'
 				)
