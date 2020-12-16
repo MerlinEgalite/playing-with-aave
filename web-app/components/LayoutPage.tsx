@@ -29,7 +29,7 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 				<br />
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />
-				Credit Delegation contract address: 0xe979891Da8c2af95146ef2eE7C6eBD20cBda5F45
+				Credit Delegation contract address: 0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB
 			</Layout.Footer>
 		</Layout>
 	)

@@ -1,5 +1,5 @@
 const addresses = {
-	creditDelegation: '0xe979891Da8c2af95146ef2eE7C6eBD20cBda5F45',
+	creditDelegation: '0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB',
 }
 
 export default addresses
