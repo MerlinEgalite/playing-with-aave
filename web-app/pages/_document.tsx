@@ -20,7 +20,10 @@ export default class MyDocument extends Document<IProps> {
 		return (
 			<Html>
 				<Head>
-					<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap" rel="stylesheet" />
+					<link
+						href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap"
+						rel="stylesheet"
+					/>
 					{this.props.styleTags}
 				</Head>
 				<body>

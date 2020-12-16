@@ -6,7 +6,6 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { GlobalStyle } from '../styles/style'
 import '../styles/App.css'
 
-
 type AppState = {
 	initialized: boolean
 	web3Modal: Web3Modal | null
