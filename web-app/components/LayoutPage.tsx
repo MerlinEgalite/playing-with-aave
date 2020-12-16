@@ -22,7 +22,10 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 			</Layout.Header>
 			<Layout.Content>{children}</Layout.Content>
 			<Layout.Footer style={{ textAlign: 'center' }}>
-				🌍 The Cool Project
+				<span role="img" aria-label="earth">
+					🌍
+				</span>{' '}
+				The Cool Project
 				<br />
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />

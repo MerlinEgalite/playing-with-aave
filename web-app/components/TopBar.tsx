@@ -11,7 +11,12 @@ export default function TopBar(): JSX.Element {
 		<StyledTopBar>
 			<Link href="/">
 				<StyledLogo>
-					<StyledText>🌍 The Cool Project</StyledText>
+					<StyledText>
+						<span role="img" aria-label="earth">
+							🌍{' '}
+						</span>
+						The Cool Project
+					</StyledText>
 				</StyledLogo>
 			</Link>
 			<StyledDesktopMenuWrapper>
