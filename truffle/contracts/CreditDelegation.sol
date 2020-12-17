@@ -18,7 +18,7 @@ contract CreditDelegation {
 
 	ILendingPoolAddressesProvider provider;
 	ILendingPool lendingPool;
-	IProtocolDataProvider dataProvider;
+	IProtocolDataProvider constant dataProvider = IProtocolDataProvider(address(0x744C1aaA95232EeF8A9994C4E0b3a89659D9AB79));
 
 	address owner;
 
@@ -26,7 +26,6 @@ contract CreditDelegation {
 		// Kovan
 		provider = ILendingPoolAddressesProvider(address(0x652B2937Efd0B5beA1c8d54293FC1289672AFC6b));
 		lendingPool = ILendingPool(provider.getLendingPool());
-		dataProvider = IProtocolDataProvider(provider.getAddress('0x1'));
 		owner = msg.sender;
 	}
 
@@ -44,7 +43,7 @@ contract CreditDelegation {
 			IERC20(asset).safeTransferFrom(msg.sender, address(this), amount);
 		}
 		IERC20(asset).safeApprove(address(lendingPool), amount);
-		lendingPool.deposit(asset, amount, address(this), 0);
+		lendingPool.deposit(asset, amount, msg.sender, 0);
 	}
 
 	/**

@@ -33,7 +33,6 @@ module.exports = {
 
         // This rule is not compatible with Next.js's <Link /> components
         'jsx-a11y/anchor-is-valid': 'off',
-
         '@typescript-eslint/no-unused-vars': ['error'],
         '@typescript-eslint/explicit-function-return-type': [
           'warn',
@@ -41,7 +40,7 @@ module.exports = {
             allowExpressions: true,
             allowConciseArrowFunctionExpressionsStartingWithVoid: true,
           },
-				],
+				]
       }
     }
   ]

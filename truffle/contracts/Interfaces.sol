@@ -523,7 +523,7 @@ interface IStableDebtToken {
    * force a delegator HF to go below 1)
    **/
   function approveDelegation(address delegatee, uint256 amount) external;
-  
+
   /**
    * @dev returns the borrow allowance of the user
    * @param fromUser The user to giving allowance
