@@ -4,7 +4,9 @@ import Link from 'next/link'
 
 import DesktopMenu from './DesktopMenu'
 
-const WalletButton = dynamic((): Promise<any> => import('./WalletButton'), { ssr: false })
+const WalletButton = dynamic((): Promise<any> => import('./WalletButton'), {
+	ssr: false,
+})
 
 export default function TopBar(): JSX.Element {
 	return (

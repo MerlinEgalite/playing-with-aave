@@ -109,11 +109,14 @@ export default function Whitelist(): JSX.Element {
 						>
 							<Input disabled={formDisabled} />
 						</Form.Item>
-						<Row gutter={[24, 24]}>
-							<Button type="primary" htmlType="submit" disabled={formDisabled}>
-								Whitelist borrower
-							</Button>
-						</Row>
+						<Button
+							style={{ float: 'right' }}
+							type="primary"
+							htmlType="submit"
+							disabled={formDisabled}
+						>
+							Whitelist borrower
+						</Button>
 					</Form>
 				</Col>
 			</Row>

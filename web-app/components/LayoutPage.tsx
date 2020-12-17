@@ -17,7 +17,9 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 					rel="stylesheet"
 				/>
 			</Head>
-			<Layout.Header style={{ display: 'flex', justifyContent: 'space-between' }}>
+			<Layout.Header
+				style={{ display: 'flex', justifyContent: 'space-between' }}
+			>
 				<TopBar />
 			</Layout.Header>
 			<Layout.Content>{children}</Layout.Content>
@@ -29,7 +31,8 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 				<br />
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />
-				Credit Delegation contract address: 0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB
+				Credit Delegation contract address:
+				0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB
 			</Layout.Footer>
 		</Layout>
 	)

@@ -120,16 +120,14 @@ export default function Deposit(): JSX.Element {
 						>
 							<Input disabled={formDisabled} type="number" min={0} />
 						</Form.Item>
-						<Form.Item>
-							<Button
-								style={{ float: 'right' }}
-								type="primary"
-								htmlType="submit"
-								disabled={formDisabled}
-							>
-								Deposit tokens
-							</Button>
-						</Form.Item>
+						<Button
+							style={{ float: 'right' }}
+							type="primary"
+							htmlType="submit"
+							disabled={formDisabled}
+						>
+							Deposit tokens
+						</Button>
 					</Form>
 				</Col>
 			</Row>

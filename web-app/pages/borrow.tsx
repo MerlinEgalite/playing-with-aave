@@ -173,16 +173,14 @@ export default function Borrow(): JSX.Element {
 						>
 							<Input disabled={formDisabled} />
 						</Form.Item>
-						<Form.Item>
-							<Button
-								style={{ float: 'right' }}
-								type="primary"
-								htmlType="submit"
-								disabled={formDisabled}
-							>
-								Borrow tokens
-							</Button>
-						</Form.Item>
+						<Button
+							style={{ float: 'right' }}
+							type="primary"
+							htmlType="submit"
+							disabled={formDisabled}
+						>
+							Borrow tokens
+						</Button>
 					</Form>
 				</Col>
 			</Row>
