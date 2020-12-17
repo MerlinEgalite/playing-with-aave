@@ -27,21 +27,28 @@ export default function Whitelist(): JSX.Element {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
-		const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
+		const creditDelegationContract = new ethers.Contract(
+			creditDelegationAddress,
+			creditDelegationAbi,
+			signer
+		)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
-		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.approveBorrower)) as ethers.BigNumber
-
-		console.log(values.borrowerAddress)
-		console.log(tokenAmount)
-		console.log(values.tokenAddress)
+		const estimatedGas = (await signer?.estimateGas(
+			creditDelegationContract.approveBorrower
+		)) as ethers.BigNumber
 
 		try {
-			await creditDelegationContract.approveBorrower(values.borrowerAddress, tokenAmount, values.tokenAddress, {
-				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
-			})
+			await creditDelegationContract.approveBorrower(
+				values.borrowerAddress,
+				tokenAmount,
+				values.tokenAddress,
+				{
+					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+				}
+			)
 		} catch (e) {
 			console.log(e)
 		}
@@ -58,7 +65,13 @@ export default function Whitelist(): JSX.Element {
 			/>
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
-					<Form {...layout} form={form} style={{ paddingTop: '24px' }} onFinish={onFinish} requiredMark={false}>
+					<Form
+						{...layout}
+						form={form}
+						style={{ paddingTop: '24px' }}
+						onFinish={onFinish}
+						requiredMark={false}
+					>
 						<Form.Item
 							label="Borrower address"
 							name="borrowerAddress"
@@ -77,7 +90,8 @@ export default function Whitelist(): JSX.Element {
 							rules={[
 								{
 									required: true,
-									message: 'The amount of tokens the borrower can borrow is required',
+									message:
+										'The amount of tokens the borrower can borrow is required',
 								},
 							]}
 						>

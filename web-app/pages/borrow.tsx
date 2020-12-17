@@ -4,6 +4,7 @@ import { Row, Col, Form, Input, Button } from 'antd'
 import { ethers } from 'ethers'
 import addresses from '../contracts/adresses'
 import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import lendingPoolJson from '../contracts/abis/ILendingPool.json'
 
 import AppContext from '../utils/app-context'
 
@@ -24,7 +25,11 @@ export default function Borrow(): JSX.Element {
 	const creditDelegationAddress = addresses.creditDelegation
 	const creditDelegationAbi = creditDelegationJson.abi
 	const signer = context?.web3Provider?.getSigner()
-	const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
+	const creditDelegationContract = new ethers.Contract(
+		creditDelegationAddress,
+		creditDelegationAbi,
+		signer
+	)
 
 	useEffect(() => {
 		;(async function iife() {
@@ -50,20 +55,31 @@ export default function Borrow(): JSX.Element {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
-		const creditDelegationContract = new ethers.Contract(creditDelegationAddress, creditDelegationAbi, signer)
+		const creditDelegationContract = new ethers.Contract(
+			creditDelegationAddress,
+			creditDelegationAbi,
+			signer
+		)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
-		const estimatedGas = (await signer?.estimateGas(creditDelegationContract.borrowCredit)) as ethers.BigNumber
+		const estimatedGas = (await signer?.estimateGas(
+			creditDelegationContract.borrowCredit
+		)) as ethers.BigNumber
 
 		console.log(estimatedGas)
 		console.log(values)
 
 		try {
-			await creditDelegationContract.borrowCredit(tokenAmount, values.tokenAddress, values.delegatorAddress, {
-				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
-			})
+			await creditDelegationContract.borrowCredit(
+				tokenAmount,
+				values.tokenAddress,
+				values.delegatorAddress,
+				{
+					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+				}
+			)
 		} catch (e) {
 			console.log(e)
 		}
@@ -72,10 +88,34 @@ export default function Borrow(): JSX.Element {
 	}
 
 	const test = async (): Promise<void> => {
-		const provider = context?.web3Provider
-		const result = await provider?.getBlockWithTransactions(22591269)
+		const signer = context?.web3Provider?.getSigner()
+		const lendingPoolAbi = lendingPoolJson.abi
 
-		console.log(result)
+		const lendingPoolContract = new ethers.Contract(
+			'0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe',
+			lendingPoolAbi,
+			signer
+		)
+
+		// Get total token amount
+		const decimals = ethers.BigNumber.from(10).pow(18)
+		const tokenAmount = ethers.BigNumber.from('1').mul(decimals)
+		const estimatedGas = (await signer?.estimateGas(
+			lendingPoolContract.borrow
+		)) as ethers.BigNumber
+
+		try {
+			await lendingPoolContract.borrow(
+				'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd',
+				tokenAmount,
+				1,
+				0,
+				'0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73',
+				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
+			)
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	return (
@@ -83,13 +123,20 @@ export default function Borrow(): JSX.Element {
 			<PageHeader linkToImage="/earth.png" title="Borrow" subtitle="" />
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
-					<p style={{ textAlign: 'center' }}>Your are allowed to borrow: {allowance} Kovan Dai</p>
+					<p style={{ textAlign: 'center' }}>
+						Your are allowed to borrow: {allowance} Kovan Dai
+					</p>
 					<Button onClick={() => test()}>Test</Button>
 				</Col>
 			</Row>
 			<Row gutter={[0, 24]}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
-					<Form {...layout} form={form} onFinish={onFinish} requiredMark={false}>
+					<Form
+						{...layout}
+						form={form}
+						onFinish={onFinish}
+						requiredMark={false}
+					>
 						<Form.Item
 							label="Amount"
 							name="tokenAmount"
@@ -127,7 +174,12 @@ export default function Borrow(): JSX.Element {
 							<Input disabled={formDisabled} />
 						</Form.Item>
 						<Form.Item>
-							<Button style={{ float: 'right' }} type="primary" htmlType="submit" disabled={formDisabled}>
+							<Button
+								style={{ float: 'right' }}
+								type="primary"
+								htmlType="submit"
+								disabled={formDisabled}
+							>
 								Borrow tokens
 							</Button>
 						</Form.Item>
