@@ -22,7 +22,7 @@ contract CreditDelegation {
 
 	address owner;
 
-	constructor () public {
+	constructor () {
 		// Kovan
 		provider = ILendingPoolAddressesProvider(address(0x652B2937Efd0B5beA1c8d54293FC1289672AFC6b));
 		lendingPool = ILendingPool(provider.getLendingPool());
