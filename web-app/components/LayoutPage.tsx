@@ -29,6 +29,10 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 				</span>{' '}
 				The Cool Project
 				<br />
+				First account: 0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73
+				<br />
+				Second account: 0x627306090abaB3A6e1400e9345bC60c78a8BEf57
+				<br />
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />
 				Credit Delegation contract address:
