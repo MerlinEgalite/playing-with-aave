@@ -43,7 +43,7 @@ contract CreditDelegation {
 			IERC20(asset).safeTransferFrom(msg.sender, address(this), amount);
 		}
 		IERC20(asset).safeApprove(address(lendingPool), amount);
-		lendingPool.deposit(asset, amount, msg.sender, 0);
+		lendingPool.deposit(asset, amount, address(this), 0);
 	}
 
 	/**
@@ -63,12 +63,9 @@ contract CreditDelegation {
 		* Borrows some the uncollaterised loan
 		* @param amount The amount the borrower is allowed to borrow (i.e. their line of credit)
 		* @param asset The asset they are allowed to borrow
-		* @param delegator The delegator of the funds
-		*
-		* Add permissions to this call, e.g. only the delegatee should be able to approve borrowers!
 		*/
-	function borrowCredit(uint256 amount, address asset, address delegator) public {
-		lendingPool.borrow(asset, amount, 1, 0, delegator);
+	function borrowCredit(uint256 amount, address asset) public {
+		lendingPool.borrow(asset, amount, 1, 0, address(this));
 	}
 
 	/**
