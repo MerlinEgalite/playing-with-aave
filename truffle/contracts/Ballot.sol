@@ -11,7 +11,6 @@ contract Ballot {
 	}
 
 	struct Project {
-		address projectAddress;
 		bytes32 projectName;
 		uint amountNeeded;
 		uint voteCount;
@@ -28,12 +27,11 @@ contract Ballot {
 	// Maybe add a way to allow some projects to propose a proposal or not
 	function addProject(bytes32 projectName, address projectAddress, uint256 amountNeeded) public {
 		require(msg.sender == projectAddress, "");
-		projects.push(Project({
+		projects[projectAddress] = Project({
 			projectName: projectName,
-			projectAddress: projectAddress,
 			amountNeeded: amountNeeded,
 			voteCount: 0
-		}));
+		});
 	}
 
 	function hasRightToVote(address sender) public {
@@ -78,11 +76,11 @@ contract Ballot {
 		projects[projectAddress].voteCount += sender.weight;
 	}
 
-	function canBorrow(address projectAddress) public returns(bool) {
+	function canBorrow(address projectAddress) public view returns(bool) {
 		return projects[projectAddress].voteCount > 66;
 	}
 
-	function checkProjectAllowance(address projectAddress) public returns(uint256) {
+	function checkProjectAllowance(address projectAddress) public view returns(uint256) {
 		if (canBorrow(projectAddress)) {
 			return projects[projectAddress].amountNeeded;
 		} else {
