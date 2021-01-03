@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
-import addresses from '../contracts/adresses'
+import addresses from '../contracts/addresses'
 import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
 import lendingPoolJson from '../contracts/abis/ILendingPool.json'
 
@@ -40,7 +40,7 @@ export default function Borrow(): JSX.Element {
 			try {
 				const address = await context?.web3Provider?.getSigner().getAddress()
 				const result = await creditDelegationContract.checkAllowance(
-					'0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB',
+					'0x93a284C91768F3010D52cD37f84f22c5052be40b',
 					address,
 					'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd'
 				)
@@ -49,15 +49,18 @@ export default function Borrow(): JSX.Element {
 				console.log(e)
 			}
 		})()
-	}, [context.web3Provider])
+	})
 
 	const onFinish = async (values: any): Promise<void> => {
 		setFormDisabled(true)
 
+		const lendingPoolAddress = addresses.lendingPool
+		const lendingPoolAbi = creditDelegationJson.abi
+
 		const signer = context?.web3Provider?.getSigner()
-		const creditDelegationContract = new ethers.Contract(
-			creditDelegationAddress,
-			creditDelegationAbi,
+		const lendingPoolContract = new ethers.Contract(
+			lendingPoolAddress,
+			lendingPoolAbi,
 			signer
 		)
 
@@ -65,14 +68,11 @@ export default function Borrow(): JSX.Element {
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
 		const estimatedGas = (await signer?.estimateGas(
-			creditDelegationContract.borrowCredit
+			lendingPoolContract.borrowCredit
 		)) as ethers.BigNumber
 
-		console.log(estimatedGas)
-		console.log(values)
-
 		try {
-			await creditDelegationContract.borrowCredit(
+			await lendingPoolContract.borrowCredit(
 				tokenAmount,
 				values.tokenAddress,
 				values.delegatorAddress,
@@ -89,6 +89,7 @@ export default function Borrow(): JSX.Element {
 
 	const test = async (): Promise<void> => {
 		const signer = context?.web3Provider?.getSigner()
+		const address = signer?.getAddress()
 		const lendingPoolAbi = lendingPoolJson.abi
 
 		const lendingPoolContract = new ethers.Contract(
@@ -110,7 +111,7 @@ export default function Borrow(): JSX.Element {
 				tokenAmount,
 				1,
 				0,
-				'0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73',
+				address,
 				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
 			)
 		} catch (e) {

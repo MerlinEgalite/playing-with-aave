@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
-import addresses from '../contracts/adresses'
+import addresses from '../contracts/addresses'
 import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
 import ERC20Json from '../contracts/abis/IERC20.json'
 

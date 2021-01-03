@@ -4,6 +4,8 @@ import Head from 'next/head'
 
 import TopBar from './TopBar'
 
+import addresses from '../contracts/addresses'
+
 interface Props {
 	children?: React.ReactNode
 }
@@ -36,7 +38,7 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />
 				Credit Delegation contract address:
-				0x68a185CAb9607B9BEb0B210Bf7CC320f3b3A3eFB
+				{addresses.creditDelegation}
 			</Layout.Footer>
 		</Layout>
 	)
