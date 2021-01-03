@@ -54,13 +54,10 @@ export default function Borrow(): JSX.Element {
 	const onFinish = async (values: any): Promise<void> => {
 		setFormDisabled(true)
 
-		const lendingPoolAddress = addresses.lendingPool
-		const lendingPoolAbi = creditDelegationJson.abi
-
 		const signer = context?.web3Provider?.getSigner()
-		const lendingPoolContract = new ethers.Contract(
-			lendingPoolAddress,
-			lendingPoolAbi,
+		const creditDelegationContract = new ethers.Contract(
+			creditDelegationAddress,
+			creditDelegationAbi,
 			signer
 		)
 
@@ -68,14 +65,13 @@ export default function Borrow(): JSX.Element {
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
 		const estimatedGas = (await signer?.estimateGas(
-			lendingPoolContract.borrowCredit
+			creditDelegationContract.borrowCredit
 		)) as ethers.BigNumber
 
 		try {
-			await lendingPoolContract.borrowCredit(
+			await creditDelegationContract.borrowCredit(
 				tokenAmount,
 				values.tokenAddress,
-				values.delegatorAddress,
 				{
 					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
 				}
@@ -89,7 +85,6 @@ export default function Borrow(): JSX.Element {
 
 	const test = async (): Promise<void> => {
 		const signer = context?.web3Provider?.getSigner()
-		const address = signer?.getAddress()
 		const lendingPoolAbi = lendingPoolJson.abi
 
 		const lendingPoolContract = new ethers.Contract(
@@ -111,7 +106,7 @@ export default function Borrow(): JSX.Element {
 				tokenAmount,
 				1,
 				0,
-				address,
+				'0x93a284C91768F3010D52cD37f84f22c5052be40b',
 				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
 			)
 		} catch (e) {
@@ -157,18 +152,6 @@ export default function Borrow(): JSX.Element {
 								{
 									required: true,
 									message: 'Token address is required',
-								},
-							]}
-						>
-							<Input disabled={formDisabled} />
-						</Form.Item>
-						<Form.Item
-							label="Delegator address"
-							name="delegatorAddress"
-							rules={[
-								{
-									required: true,
-									message: 'The address of the delegator is required',
 								},
 							]}
 						>
