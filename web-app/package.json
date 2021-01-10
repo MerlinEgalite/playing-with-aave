@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
+    "test": "yarn build && yarn export",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint --ext js,jsx,ts,tsx --fix"
   },
