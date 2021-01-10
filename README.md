@@ -27,12 +27,15 @@ Then, update the addresses and abis in the `contracts` folder in `web-app`.
 ## TODO
 
 Short terms:
-- Create forms to to whitelist someone.
-- Update SC to allow someone to borrow.
+- [] Review link in menu (maybe merge some pages).
+- [] Test project proposal creation and voting.
+- [] Update SC with timeframe for vote.
+- [] Add a getter for mapping?
+- [] Improve Form with a border.
 
 Long terms:
-- Implement conviction voting to whitelist new borrowers.
-- Allow projects to run for being whitelisted.
+- [] Implement conviction voting to vote on projects.
+- [] Allow projects to run for being whitelisted.
 
 ## Utils
 
