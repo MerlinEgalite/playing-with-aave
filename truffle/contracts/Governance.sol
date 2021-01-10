@@ -29,6 +29,8 @@ contract Governance {
 	mapping(address => uint256) public borrowed;
 	mapping(address => uint256) public amountsDeposited;
 
+	address[] public projectAddresses;
+
 	/**
 		* @dev Adds a project proposal to the vote
 		* @param projectName The name of the project
@@ -43,6 +45,7 @@ contract Governance {
 			amountNeeded: amountNeeded,
 			voteCount: 0
 		});
+		projectAddresses.push(projectAddress);
 	}
 
 	/**
@@ -113,6 +116,10 @@ contract Governance {
 		return projects[projectAddress].voteCount > 67;
 	}
 
+	/**
+		* @dev Checks the project allowance in DAI
+		* @param projectAddress The address of the project
+		**/
 	function getProjectAllowance(address projectAddress) public view returns(uint256) {
 		if (canBorrow(projectAddress)) {
 			Project storage project = projects[projectAddress];
