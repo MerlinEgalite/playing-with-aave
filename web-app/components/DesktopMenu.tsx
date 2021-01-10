@@ -33,6 +33,9 @@ export default function DesktopMenu(): JSX.Element {
 				<Menu.Item onClick={handleMenuOnClick} key="borrow">
 					<Link href="/borrow">Borrow</Link>
 				</Menu.Item>
+				<Menu.Item onClick={handleMenuOnClick} key="governance">
+					<Link href="/governance">Governance</Link>
+				</Menu.Item>
 			</Menu>
 		</StyledDesktopMenu>
 	)
