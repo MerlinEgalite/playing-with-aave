@@ -10,7 +10,9 @@ export default class MyDocument extends Document<IProps> {
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	static getInitialProps({ renderPage }: any): any {
 		const sheet = new ServerStyleSheet()
-		const page = renderPage((App: any) => (props: any) => sheet.collectStyles(<App {...props} />))
+		const page = renderPage((App: any) => (props: any) =>
+			sheet.collectStyles(<App {...props} />)
+		)
 
 		const styleTags = sheet.getStyleElement()
 		return { ...page, styleTags }
