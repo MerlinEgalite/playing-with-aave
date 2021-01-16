@@ -1,0 +1,345 @@
+@import '~antd/dist/antd.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+	font-family: 'IBM Plex Mono', monospace;
+	background: white;
+}
+
+html {
+	--antd-wave-shadow-color: white;
+}
+
+.ant-layout {
+	background: white;
+}
+
+.ant-layout-header {
+	background: white;
+}
+
+a {
+	color: #4361ee;
+}
+
+a:hover {
+	color: #4361ee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.--antd-wave-shadow-color {
+	text-transform: none;
+}
+
+/* Card */
+
+.ant-card-bordered {
+	border: 2px solid #f0f0f0;
+	border-radius: 18px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.ant-card-head {
+	padding: 0;
+}
+
+.ant-card-body {
+	padding-top: 24px;
+}
+
+.ant-list-item {
+	padding: 0;
+}
+
+.ant-table-tbody > tr > td  {
+	border: none;
+}
+
+.ant-card-head-title {
+	white-space: normal;
+}
+
+/* Menu Horizontal */
+
+.ant-menu-horizontal > .ant-menu-item a {
+	font-weight: bold;
+}
+
+.ant-menu-horizontal > .ant-menu-item a:hover {
+	color: #4361ee;
+}
+
+.ant-menu-item ant-menu-item-only-child {
+	border: none;
+}
+
+.ant-menu-item ant-menu-item-only-child a:active {
+	color: #4361ee;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected a {
+	color: #4361ee;
+}
+
+.ant-menu-item {
+	border: none;
+}
+
+.ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu {
+	border: none;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+	border: none;
+	color: #4361ee;
+}
+
+/* Menu Vertical */
+
+.ant-menu-vertical > .ant-menu-item a {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.ant-menu-vertical > .ant-menu-item a:hover {
+	color: #4361ee;
+}
+
+.ant-menu-item ant-menu-item-only-child {
+	border: none;
+}
+
+.ant-menu-item ant-menu-item-only-child a:active {
+	color: #4361ee;
+}
+
+.ant-menu-vertical > .ant-menu-item-selected a {
+	color: #4361ee;
+}
+
+.ant-menu-item {
+	border: none;
+}
+
+.ant-menu-vertical > .ant-menu-item, .ant-menu-vertical > .ant-menu-submenu {
+	border: none;
+}
+
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+	border: none;
+	color: #4361ee;
+}
+
+.ant-menu-root.ant-menu-vertical, .ant-menu-root.ant-menu-vertical-left, .ant-menu-root.ant-menu-vertical-right, .ant-menu-root.ant-menu-inline {
+	margin-top: 100px;
+}
+
+.ant-menu-vertical .ant-menu-item {
+	text-align: center;
+}
+
+.ant-menu-item-selected {
+	color: none;
+}
+
+.ant-menu-item:active, .ant-menu-submenu-title:active {
+	color: none;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+	background-color: transparent;
+}
+
+.ant-menu-item:active, .ant-menu-submenu-title:active {
+	background: none;
+}
+
+/* Button */
+
+.ant-btn {
+	border: #4361ee;
+	outline: none;
+	text-transform: none;
+}
+
+.ant-btn-default {
+	color: white;
+	border-radius: 18px;
+	background: #4361ee;
+	border: none;
+	padding-left: 16px;
+	padding-right: 16px;
+	align-items: center;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ant-btn:hover {
+	color: rgb(20,1,8);
+	background: white;
+	border: none;
+}
+
+.ant-btn-primary {
+	color: rgb(20,1,8);
+	font-weight: bold;
+	border-radius: 18px;
+	background: white;
+	border: none;
+	padding-left: 16px;
+	padding-right: 16px;
+	text-shadow: none;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ant-btn-primary:active {
+	color: white;
+	background: #4361ee;
+	border-color: #4361ee;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+	color: white;
+	background: #4361ee;
+	border-color: #4361ee;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ant-menu-item {
+  border-style: none;
+}
+
+.ant-modal-content {
+	border-radius: 18px;
+}
+
+/* Input */
+
+.ant-input {
+	border-radius: 18px;
+}
+
+.ant-input:hover {
+	border: 1px solid #333
+}
+
+.ant-input-group-addon {
+	border-radius: 18px 0px 0px 18px;
+}
+
+.ant-input:focus, .ant-input-focused {
+	box-shadow: 0 0 0 2px rgb(0, 0, 0, 0.05);
+}
+
+/* Modal */
+
+.ant-modal-body {
+	padding: 20px 20px 5px 20px;
+}
+
+.ant-modal-close {
+	display: none;
+}
+
+/* Form */
+
+.ant-form-item-label > label {
+	float: left;
+}
+
+/* Statistic */
+
+.ant-statistic {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+
+.ant-statistic-content-value {
+	font-size: 14px;
+	padding-left: 5px;
+}
+
+.ant-statistic-content-value {
+	color: rgba(0, 0, 0, 0.45);
+}
+
+/* Message */
+
+.ant-message-notice-content {
+	border-radius: 10px;
+}
+
+/* Steps */
+
+.ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail:after {
+	background-color: #4361ee;
+}
+
+.ant-steps-item-process .ant-steps-item-icon {
+	background: #4361ee;
+	border-color: #4361ee;
+	color: #4361ee;
+}
+
+.ant-steps-item-icon .ant-steps-icon {
+	color: #4361ee;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+	border-color: #4361ee;
+	color:#4361ee;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
+	background-color: #4361ee;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon {
+	border-color: #4361ee;
+}
+
+.ant-message-info .anticon, .ant-message-loading .anticon {
+	color: #4361ee;
+}
+
+/* Spin */
+
+.ant-spin-dot-item {
+	background: #4361ee;
+}
+
+/* Progress */
+
+.ant-progress-success-bg, .ant-progress-bg {
+	background-color: rgb(236, 14, 92, 0.6);
+}
+
+/* Drawer */
+
+.ant-drawer-body {
+	padding: 0;
+	background-color: #fff4e9;
+}
+
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-submenu {
+  display: inline-block;
+  width: 100%;
+}
+
+.ant-drawer-body .ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-item:hover {
+  border-bottom-color: transparent;
+}
