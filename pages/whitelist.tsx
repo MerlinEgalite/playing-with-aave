@@ -3,7 +3,7 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import creditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
@@ -20,7 +20,7 @@ export default function Whitelist(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.creditDelegation
+	const creditDelegationAddress = addresses.simpleCreditDelegation
 	const creditDelegationAbi = creditDelegationJson.abi
 
 	const onFinish = async (values: any): Promise<void> => {

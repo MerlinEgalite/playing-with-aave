@@ -37,7 +37,7 @@ export default function LayoutPage({ children }: Props): JSX.Element {
 				<br />
 				Dai address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 				<br />
-				Credit Delegation contract address: {addresses.creditDelegation}
+				Credit Delegation contract address: {addresses.simpleCreditDelegation}
 			</Layout.Footer>
 		</Layout>
 	)
