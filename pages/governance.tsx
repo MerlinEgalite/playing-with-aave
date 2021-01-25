@@ -3,20 +3,20 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
-import ERC20Json from '../contracts/abis/IERC20.json'
+import governanceCreditDelegationJson from '../contracts/abis/GovernanceCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
+import ProjectsList from '../components/ProjectsList'
 
-interface IDepositForm {
-	tokenAddress: string
-	tokenAmount: string | number
+interface IProjectProposalForm {
+	projectName: string
+	amountNeeded: string | number
 }
 
-export default function Deposit(): JSX.Element {
+export default function Governance(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
 	const [formDisabled, setFormDisabled] = useState(false)
@@ -26,58 +26,36 @@ export default function Deposit(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.simpleCreditDelegation
-	const creditDelegationAbi = simpleCreditDelegationJson.abi
+	const governanceCreditDelegationAddress = addresses.governanceCreditDelegation
+	const governanceCreditDelegationAbi = governanceCreditDelegationJson.abi
 
-	const daiAddress = addresses.dai
-	const ERC20Abi = ERC20Json.abi
-
-	const onFinish = async (values: IDepositForm): Promise<boolean | void> => {
+	const onProjectProposalSubmit = async (
+		values: IProjectProposalForm
+	): Promise<boolean | void> => {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
 		const address = await signer?.getAddress()
-		const creditDelegationContract = new ethers.Contract(
-			creditDelegationAddress,
-			creditDelegationAbi,
+		const governanceCreditDelegationContract = new ethers.Contract(
+			governanceCreditDelegationAddress,
+			governanceCreditDelegationAbi,
 			signer
 		)
-		const tokenContract = new ethers.Contract(daiAddress, ERC20Abi, signer)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
-		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
+		const amountNeeded = ethers.BigNumber.from(values.amountNeeded).mul(
+			decimals
+		)
 		const estimatedGas = (await signer?.estimateGas(
-			creditDelegationContract.depositCollateral
+			governanceCreditDelegationContract.addProjectProposal
 		)) as ethers.BigNumber
 
-		let allowance = 0
-		// Check allowance
 		try {
-			allowance = await tokenContract.allowance(
+			await governanceCreditDelegationContract.addProjectProposal(
+				values.projectName,
 				address,
-				creditDelegationAddress
-			)
-		} catch (e) {
-			console.log(e)
-			setFormDisabled(false)
-			return false
-		}
-
-		if (tokenAmount.gt(allowance)) {
-			try {
-				await tokenContract.approve(creditDelegationAddress, tokenAmount)
-			} catch (e) {
-				console.log(e)
-				setFormDisabled(false)
-				return false
-			}
-		}
-
-		try {
-			await creditDelegationContract.depositCollateral(
-				values.tokenAddress,
-				tokenAmount,
+				amountNeeded,
 				true,
 				{
 					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
@@ -92,22 +70,26 @@ export default function Deposit(): JSX.Element {
 
 	return (
 		<LayoutPage>
-			<PageHeader linkToImage="/earth.png" title="Deposit" subtitle="" />
-			<Row gutter={[0, 24]}>
+			<PageHeader
+				linkToImage="/earth.png"
+				title="Governance"
+				subtitle="Propose or vote for a project"
+			/>
+			<Row gutter={[0, 24]} style={{ marginBottom: '64px' }}>
 				<Col md={{ span: 10, offset: 7 }} xs={{ span: 20, offset: 2 }}>
 					<Form
 						{...layout}
 						form={form}
-						onFinish={onFinish}
+						onFinish={onProjectProposalSubmit}
 						requiredMark={false}
 					>
 						<Form.Item
-							label="Asset address"
-							name="tokenAddress"
+							label="Project Name"
+							name="projectName"
 							rules={[
 								{
 									required: true,
-									message: 'Token address is required',
+									message: 'Project name is required',
 								},
 							]}
 						>
@@ -115,11 +97,11 @@ export default function Deposit(): JSX.Element {
 						</Form.Item>
 						<Form.Item
 							label="Amount"
-							name="tokenAmount"
+							name="amountNeeded"
 							rules={[
 								{
 									required: true,
-									message: 'The amount of token to send is required',
+									message: 'The amount of DAI needed is required',
 								},
 							]}
 						>
@@ -131,9 +113,14 @@ export default function Deposit(): JSX.Element {
 							htmlType="submit"
 							disabled={formDisabled}
 						>
-							Deposit tokens
+							Submit Project Proposal
 						</Button>
 					</Form>
+				</Col>
+			</Row>
+			<Row gutter={[0, 24]} style={{ marginBottom: '64px' }}>
+				<Col md={{ span: 14, offset: 5 }} xs={{ span: 20, offset: 2 }}>
+					<ProjectsList />
 				</Col>
 			</Row>
 		</LayoutPage>

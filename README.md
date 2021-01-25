@@ -1,6 +1,7 @@
 # The Cool Project
 
 The Cool project is a really cool project. It allows to create uncollaterallized loans on top of Aave V2 for impactful project that aim to make the planet great again.
+You can check the app on [Netlify](https://the-cool-project.netlify.app/).
 
 ## Web App
 
@@ -26,17 +27,17 @@ Then, update the addresses and abis in the `contracts` folder in `web-app`.
 ## TODO
 
 Short terms:
-- Create forms to to whitelist someone.
-- Update SC to allow someone to borrow.
-
+- [] Review link in menu (maybe merge some pages).
+- [] Test project proposal creation and voting.
+- [] Update SC with timeframe for vote.
+- [] Add a getter for mapping?
+- [] Improve Form with a border.
 
 Long terms:
-- Implement conviction voting to whitelist new borrowers.
-- Allow projects to run for being whitelisted.
-
+- [] Implement conviction voting to vote on projects.
+- [] Allow projects to run for being whitelisted.
 
 ## Utils
-
 
 - DAI address: 0xff795577d9ac8bd7d90ee22b6c1703490b6512fd
 - First account: 0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73

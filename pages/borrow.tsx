@@ -3,13 +3,17 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
-import lendingPoolJson from '../contracts/abis/ILendingPool.json'
+import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
+
+interface IBorrowForm {
+	tokenAddress: string
+	tokenAmount: string | number
+}
 
 export default function Borrow(): JSX.Element {
 	const [form] = Form.useForm()
@@ -23,7 +27,7 @@ export default function Borrow(): JSX.Element {
 	}
 
 	const creditDelegationAddress = addresses.simpleCreditDelegation
-	const creditDelegationAbi = creditDelegationJson.abi
+	const creditDelegationAbi = simpleCreditDelegationJson.abi
 	const signer = context?.web3Provider?.getSigner()
 	const creditDelegationContract = new ethers.Contract(
 		creditDelegationAddress,
@@ -40,7 +44,6 @@ export default function Borrow(): JSX.Element {
 			try {
 				const address = await context?.web3Provider?.getSigner().getAddress()
 				const result = await creditDelegationContract.checkAllowance(
-					'0x93a284C91768F3010D52cD37f84f22c5052be40b',
 					address,
 					'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd'
 				)
@@ -51,7 +54,7 @@ export default function Borrow(): JSX.Element {
 		})()
 	})
 
-	const onFinish = async (values: any): Promise<void> => {
+	const onFinish = async (values: IBorrowForm): Promise<void> => {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
@@ -83,37 +86,6 @@ export default function Borrow(): JSX.Element {
 		setFormDisabled(false)
 	}
 
-	const test = async (): Promise<void> => {
-		const signer = context?.web3Provider?.getSigner()
-		const lendingPoolAbi = lendingPoolJson.abi
-
-		const lendingPoolContract = new ethers.Contract(
-			'0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe',
-			lendingPoolAbi,
-			signer
-		)
-
-		// Get total token amount
-		const decimals = ethers.BigNumber.from(10).pow(18)
-		const tokenAmount = ethers.BigNumber.from('1').mul(decimals)
-		const estimatedGas = (await signer?.estimateGas(
-			lendingPoolContract.borrow
-		)) as ethers.BigNumber
-
-		try {
-			await lendingPoolContract.borrow(
-				'0xff795577d9ac8bd7d90ee22b6c1703490b6512fd',
-				tokenAmount,
-				1,
-				0,
-				'0x93a284C91768F3010D52cD37f84f22c5052be40b',
-				{ gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)) }
-			)
-		} catch (e) {
-			console.log(e)
-		}
-	}
-
 	return (
 		<LayoutPage>
 			<PageHeader linkToImage="/earth.png" title="Borrow" subtitle="" />
@@ -122,7 +94,6 @@ export default function Borrow(): JSX.Element {
 					<p style={{ textAlign: 'center' }}>
 						Your are allowed to borrow: {allowance} Kovan Dai
 					</p>
-					<Button onClick={() => test()}>Test</Button>
 				</Col>
 			</Row>
 			<Row gutter={[0, 24]}>
