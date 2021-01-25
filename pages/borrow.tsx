@@ -3,7 +3,7 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
@@ -26,8 +26,8 @@ export default function Borrow(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.creditDelegation
-	const creditDelegationAbi = creditDelegationJson.abi
+	const creditDelegationAddress = addresses.simpleCreditDelegation
+	const creditDelegationAbi = simpleCreditDelegationJson.abi
 	const signer = context?.web3Provider?.getSigner()
 	const creditDelegationContract = new ethers.Contract(
 		creditDelegationAddress,

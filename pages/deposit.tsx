@@ -3,7 +3,7 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
 import ERC20Json from '../contracts/abis/IERC20.json'
 
 import AppContext from '../utils/app-context'
@@ -26,8 +26,8 @@ export default function Deposit(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.creditDelegation
-	const creditDelegationAbi = creditDelegationJson.abi
+	const creditDelegationAddress = addresses.simpleCreditDelegation
+	const creditDelegationAbi = simpleCreditDelegationJson.abi
 
 	const daiAddress = addresses.dai
 	const ERC20Abi = ERC20Json.abi

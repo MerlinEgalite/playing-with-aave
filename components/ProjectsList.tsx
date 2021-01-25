@@ -3,7 +3,7 @@ import { Button, Card, List, Col, Spin, Progress } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import governanceCreditDelegationJson from '../contracts/abis/GovernanceCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
@@ -19,8 +19,8 @@ export default function ProjectsList(): JSX.Element {
 	const [projects, setProjects] = useState<IProject[]>([])
 	const context = useContext(AppContext)
 
-	const creditDelegationAddress = addresses.creditDelegation
-	const creditDelegationAbi = creditDelegationJson.abi
+	const creditDelegationAddress = addresses.governanceCreditDelegation
+	const creditDelegationAbi = governanceCreditDelegationJson.abi
 
 	useEffect(() => {
 		;(async function iife() {

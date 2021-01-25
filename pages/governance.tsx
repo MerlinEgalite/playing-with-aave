@@ -3,7 +3,7 @@ import { Row, Col, Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import creditDelegationJson from '../contracts/abis/CreditDelegation.json'
+import governanceCreditDelegationJson from '../contracts/abis/GovernanceCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
@@ -26,8 +26,8 @@ export default function Governance(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.creditDelegation
-	const creditDelegationAbi = creditDelegationJson.abi
+	const governanceCreditDelegationAddress = addresses.governanceCreditDelegation
+	const governanceCreditDelegationAbi = governanceCreditDelegationJson.abi
 
 	const onProjectProposalSubmit = async (
 		values: IProjectProposalForm
@@ -36,9 +36,9 @@ export default function Governance(): JSX.Element {
 
 		const signer = context?.web3Provider?.getSigner()
 		const address = await signer?.getAddress()
-		const creditDelegationContract = new ethers.Contract(
-			creditDelegationAddress,
-			creditDelegationAbi,
+		const governanceCreditDelegationContract = new ethers.Contract(
+			governanceCreditDelegationAddress,
+			governanceCreditDelegationAbi,
 			signer
 		)
 
@@ -48,11 +48,11 @@ export default function Governance(): JSX.Element {
 			decimals
 		)
 		const estimatedGas = (await signer?.estimateGas(
-			creditDelegationContract.addProjectProposal
+			governanceCreditDelegationContract.addProjectProposal
 		)) as ethers.BigNumber
 
 		try {
-			await creditDelegationContract.addProjectProposal(
+			await governanceCreditDelegationContract.addProjectProposal(
 				values.projectName,
 				address,
 				amountNeeded,
