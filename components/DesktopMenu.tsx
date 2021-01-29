@@ -24,11 +24,8 @@ export default function DesktopMenu(): JSX.Element {
 				<Menu.Item onClick={handleMenuOnClick} key="/">
 					<Link href="/">Home</Link>
 				</Menu.Item>
-				<Menu.Item onClick={handleMenuOnClick} key="deposit">
-					<Link href="/deposit">Deposit</Link>
-				</Menu.Item>
-				<Menu.Item onClick={handleMenuOnClick} key="whitelist">
-					<Link href="/whitelist">Whitelist</Link>
+				<Menu.Item onClick={handleMenuOnClick} key="lend">
+					<Link href="/lend">Lend</Link>
 				</Menu.Item>
 				<Menu.Item onClick={handleMenuOnClick} key="borrow">
 					<Link href="/borrow">Borrow</Link>
