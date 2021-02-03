@@ -90,7 +90,7 @@ export default function ProposalForm(): JSX.Element {
 				<Input disabled={formDisabled} type="number" min={0} />
 			</Form.Item>
 			<Form.Item
-				label="Bénéficiaire"
+				label="Beneficiary"
 				name="beneficiary"
 				rules={[
 					{

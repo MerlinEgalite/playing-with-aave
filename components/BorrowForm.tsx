@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
+import CVCDJson from '../contracts/abis/ConvictionVotingCreditDelegation.json'
 
 import AppContext from '../utils/app-context'
 
@@ -11,46 +11,38 @@ interface IBorrowForm {
 	tokenAmount: string | number
 }
 
-// TODO: add a limit on the form he can borrow
-export default function Borrow(): JSX.Element {
+export default function BorrowForm(): JSX.Element {
 	const [form] = Form.useForm()
 	const context = useContext(AppContext)
 	const [formDisabled, setFormDisabled] = useState(false)
+	// TODO: change that
+	const proposalId = 1
 
 	const layout = {
 		labelCol: { span: 10 },
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.simpleCreditDelegation
-	const creditDelegationAbi = simpleCreditDelegationJson.abi
-	const daiAddress = addresses.dai
+	const CVCDAddress = addresses.convictionVotingCreditDelegation
+	const CVCDAbi = CVCDJson.abi
 
 	const onFinish = async (values: IBorrowForm): Promise<void> => {
 		setFormDisabled(true)
 
 		const signer = context?.web3Provider?.getSigner()
-		const simpleCreditDelegationContract = new ethers.Contract(
-			creditDelegationAddress,
-			creditDelegationAbi,
-			signer
-		)
+		const CVCDContract = new ethers.Contract(CVCDAddress, CVCDAbi, signer)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
 		const estimatedGas = (await signer?.estimateGas(
-			simpleCreditDelegationContract.borrowCredit
+			CVCDContract.borrowCredit
 		)) as ethers.BigNumber
 
 		try {
-			await simpleCreditDelegationContract.borrowCredit(
-				tokenAmount,
-				daiAddress,
-				{
-					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
-				}
-			)
+			await CVCDContract.borrowCredit(proposalId, tokenAmount, {
+				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+			})
 		} catch (e) {
 			console.log(e)
 		}

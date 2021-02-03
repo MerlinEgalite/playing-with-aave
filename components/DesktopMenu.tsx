@@ -24,14 +24,14 @@ export default function DesktopMenu(): JSX.Element {
 				<Menu.Item onClick={handleMenuOnClick} key="/">
 					<Link href="/">Home</Link>
 				</Menu.Item>
-				<Menu.Item onClick={handleMenuOnClick} key="lend">
-					<Link href="/lend">Lend</Link>
+				<Menu.Item onClick={handleMenuOnClick} key="deposit">
+					<Link href="/deposit">Deposit</Link>
 				</Menu.Item>
 				<Menu.Item onClick={handleMenuOnClick} key="borrow">
 					<Link href="/borrow">Borrow</Link>
 				</Menu.Item>
-				<Menu.Item onClick={handleMenuOnClick} key="governance">
-					<Link href="/governance">Governance</Link>
+				<Menu.Item onClick={handleMenuOnClick} key="proposals">
+					<Link href="/proposals">Proposals</Link>
 				</Menu.Item>
 			</Menu>
 		</StyledDesktopMenu>

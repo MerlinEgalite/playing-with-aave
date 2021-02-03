@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 
 import { ethers } from 'ethers'
 import addresses from '../contracts/addresses'
-import simpleCreditDelegationJson from '../contracts/abis/SimpleCreditDelegation.json'
+import CVCDJson from '../contracts/abis/ConvictionVotingCreditDelegation.json'
 import ERC20Json from '../contracts/abis/IERC20.json'
 
 import AppContext from '../utils/app-context'
@@ -22,8 +22,8 @@ export default function DepositForm(): JSX.Element {
 		wrapperCol: { span: 14 },
 	}
 
-	const creditDelegationAddress = addresses.simpleCreditDelegation
-	const creditDelegationAbi = simpleCreditDelegationJson.abi
+	const CVCDAddress = addresses.convictionVotingCreditDelegation
+	const CVCDAbi = CVCDJson.abi
 	const daiAddress = addresses.dai
 	const ERC20Abi = ERC20Json.abi
 
@@ -32,27 +32,20 @@ export default function DepositForm(): JSX.Element {
 
 		const signer = context?.web3Provider?.getSigner()
 		const address = await signer?.getAddress()
-		const creditDelegationContract = new ethers.Contract(
-			creditDelegationAddress,
-			creditDelegationAbi,
-			signer
-		)
+		const CVCDContract = new ethers.Contract(CVCDAddress, CVCDAbi, signer)
 		const tokenContract = new ethers.Contract(daiAddress, ERC20Abi, signer)
 
 		// Get total token amount
 		const decimals = ethers.BigNumber.from(10).pow(18)
 		const tokenAmount = ethers.BigNumber.from(values.tokenAmount).mul(decimals)
 		const estimatedGas = (await signer?.estimateGas(
-			creditDelegationContract.depositCollateral
+			CVCDContract.depositCollateral
 		)) as ethers.BigNumber
 
 		let allowance = 0
 		// Check allowance
 		try {
-			allowance = await tokenContract.allowance(
-				address,
-				creditDelegationAddress
-			)
+			allowance = await tokenContract.allowance(address, CVCDAddress)
 		} catch (e) {
 			console.log(e)
 			setFormDisabled(false)
@@ -61,7 +54,7 @@ export default function DepositForm(): JSX.Element {
 
 		if (tokenAmount.gt(allowance)) {
 			try {
-				await tokenContract.approve(creditDelegationAddress, tokenAmount)
+				await tokenContract.approve(CVCDAddress, tokenAmount)
 			} catch (e) {
 				console.log(e)
 				setFormDisabled(false)
@@ -70,14 +63,9 @@ export default function DepositForm(): JSX.Element {
 		}
 
 		try {
-			await creditDelegationContract.depositCollateral(
-				daiAddress,
-				tokenAmount,
-				true,
-				{
-					gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
-				}
-			)
+			await CVCDContract.depositCollateral(daiAddress, tokenAmount, true, {
+				gasLimit: estimatedGas.mul(ethers.BigNumber.from(10)),
+			})
 		} catch (e) {
 			console.log(e)
 		}

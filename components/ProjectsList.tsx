@@ -1,97 +1,56 @@
-import { useContext, useEffect, useState } from 'react'
-import { Button, Card, List, Col, Spin, Progress } from 'antd'
+// import { useContext, useState } from 'react'
+import { Button, Card, List, Col, Progress } from 'antd'
 
-import { ethers } from 'ethers'
-import addresses from '../contracts/addresses'
-import governanceCreditDelegationJson from '../contracts/abis/GovernanceCreditDelegation.json'
+// import { ethers } from 'ethers'
+// import addresses from '../contracts/addresses'
+// import CVCDJson from '../contracts/abis/ConvictionVotingCreditDelegation.json'
 
-import AppContext from '../utils/app-context'
+// import useProposals from '../hooks/useProposals'
+// import AppContext from '../utils/app-context'
 
-interface IProject {
-	projectName: string
-	projectAddress: string
-	voteCount: number
-	voted: boolean
-}
+export default function ProposalsList(): JSX.Element {
+	// const [loadingProjects, setLoadingProjects] = useState(true)
+	// const context = useContext(AppContext)
 
-export default function ProjectsList(): JSX.Element {
-	const [loadingProjects, setLoadingProjects] = useState(true)
-	const [projects, setProjects] = useState<IProject[]>([])
-	const context = useContext(AppContext)
+	// const proposals = useProposals()
 
-	const creditDelegationAddress = addresses.governanceCreditDelegation
-	const creditDelegationAbi = governanceCreditDelegationJson.abi
-
-	useEffect(() => {
-		;(async function iife() {
-			if (context.web3Provider === null) {
-				return
-			}
-
-			const signer = context?.web3Provider?.getSigner()
-			// const address = (await signer?.getAddress()) || ''
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const creditDelegationContract = new ethers.Contract(
-				creditDelegationAddress,
-				creditDelegationAbi,
-				signer
-			)
-
-			// const projectAddresses = await creditDelegationContract.projectAddresses
-			// eslint-disable-next-line no-constant-condition
-			if (true) {
-				// if (projectAddresses) {
-				// const voter = (await creditDelegationContract.voters())[address]
-				// const projectMapping = await creditDelegationContract.projects()
-				// const projectsList = projectAddresses.map((projectAddress: string) => {
-				// 	return {
-				// 		...projectMapping[projectAddress],
-				// 		voted: voter.voted[projectAddress],
-				// 	}
-				// })
-
-				const projectsList: IProject[] = [
-					{
-						projectName: 'Project 1',
-						projectAddress: '0x add copy / paste',
-						voteCount: 50,
-						voted: true,
-					},
-					{
-						projectName: 'Project 2',
-						projectAddress: '0x add copy / paste',
-						voteCount: 68,
-						voted: false,
-					},
-				]
-
-				setProjects(projectsList)
-				setLoadingProjects(false)
-			} else {
-				setLoadingProjects(false)
-			}
-		})()
-	})
+	const proposals = [
+		{
+			projectId: 1,
+			beneficiary: '0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73',
+			voteCount: 50,
+			voted: true,
+		},
+		{
+			projectId: 2,
+			beneficiary: '0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73',
+			voteCount: 68,
+			voted: false,
+		},
+	]
 
 	return (
 		<Card
 			title="Projects you can vote on"
 			headStyle={{ textAlign: 'center', fontWeight: 'bold' }}
 		>
-			{loadingProjects && (
+			{/* {loadingProjects && (
 				<div style={{ textAlign: 'center' }}>
 					<Spin />
 				</div>
-			)}
+			)} */}
 
-			{!loadingProjects && projects.length > 0 && (
+			{proposals.length > 0 && (
 				<List
-					dataSource={projects}
+					dataSource={proposals}
 					split={false}
-					renderItem={(project: IProject) => (
-						<List.Item>
-							<Col xs={3}>{project.projectName}</Col>
-							<Col xs={6}>{project.projectAddress}</Col>
+					renderItem={(project: any) => (
+						<List.Item
+							style={{ cursor: 'pointer' }}
+							onClick={() => console.log(project.projectId)}
+						>
+							<Col xs={1}>{project.projectId}</Col>
+							<Col xs={11}>{project.beneficiary}</Col>
 							<Col xs={6}>
 								<Progress percent={project.voteCount} />
 								{project.voteCount} / {67} To pass
@@ -115,7 +74,7 @@ export default function ProjectsList(): JSX.Element {
 				/>
 			)}
 
-			{!loadingProjects && projects.length == 0 && <div>No Project</div>}
+			{/* {!loadingProjects && proposals.length == 0 && <div>No Proposals</div>} */}
 		</Card>
 	)
 }
