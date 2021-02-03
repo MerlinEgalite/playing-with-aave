@@ -9,7 +9,7 @@ import AppContext from '../utils/app-context'
 
 import LayoutPage from '../components/LayoutPage'
 import PageHeader from '../components/PageHeader'
-import ProjectsList from '../components/ProjectsList'
+import ProjectsList from '../components/ProposalsList'
 
 interface IProjectProposalForm {
 	projectName: string
